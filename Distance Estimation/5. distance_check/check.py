@@ -17,7 +17,7 @@ MARKER_SIZE = 6  # centimeters (measure your printed marker size)
 
 marker_dict = aruco.getPredefinedDictionary(aruco.DICT_5X5_250) # assigning the dictionary type
 
-param_markers = aruco.DetectorParameters() # detects the parameters and stores it as param_markers
+param_markers = aruco.DetectorParameters() # detects the parameters and stores it as param_markers (example: < cv2.aruco.DetectorParameters 000001CCB6B03D20>)
 
 cap = cv.VideoCapture(0) # captures the frames
 
@@ -29,6 +29,7 @@ while True:
     marker_corners, marker_IDs, reject = aruco.detectMarkers(
         gray_frame, marker_dict, parameters=param_markers
     ) # detects the markers in the frame using param_markers
+    print(f"There are {len(marker_corners)} corners available in the frame")
     if marker_corners:
         rVec, tVec, _ = aruco.estimatePoseSingleMarkers(
             marker_corners, MARKER_SIZE, cam_mat, dist_coef
