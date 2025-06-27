@@ -1,6 +1,17 @@
 import cv2 as cv # importing modules
 from cv2 import aruco
 import numpy as np
+from picamera2 import Picamera2
+import time
+
+picam2 = Picamera2()
+config = picam2.create_preview_configuration(main={"size": (1280, 720)}, lores={"size": (640, 480)}, display="lores")
+picam2.configure(config)
+
+picam2.start()
+time.sleep(1)
+
+cv.namedWindow("RPI connection", cv.WINDOW_NORMAL)
 
 # load in the calibration data
 calib_data_path = "../calib_data/MultiMatrix.npz" # assign path
@@ -19,12 +30,10 @@ marker_dict = aruco.getPredefinedDictionary(aruco.DICT_5X5_250) # assigning the 
 
 param_markers = aruco.DetectorParameters() # detects the parameters and stores it as param_markers (example: < cv2.aruco.DetectorParameters 000001CCB6B03D20>)
 
-cap = cv.VideoCapture(0) # captures the frames
-
 while True:
-    ret, frame = cap.read() # reads the camera
-    if not ret:
-        break
+    frame = picam2.capture_array("main")
+    frame_bgr = cv.cvtColor(frame, cv.COLOR_RGB2BGR)
+
     gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY) # converting to grayscale
     marker_corners, marker_IDs, reject = aruco.detectMarkers(
         gray_frame, marker_dict, parameters=param_markers
@@ -73,9 +82,9 @@ while True:
                 cv.LINE_AA,
             ) # displays x and y coordinates
             # print(ids, "  ", corners)
-    cv.imshow("frame", frame)
+    cv.imshow("frame", frame_bgr)
     key = cv.waitKey(1)
     if key == ord("q"):
         break
-cap.release()
+picam2.stop()
 cv.destroyAllWindows()
