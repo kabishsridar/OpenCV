@@ -14,7 +14,7 @@ time.sleep(1)
 cv.namedWindow("RPI connection", cv.WINDOW_NORMAL)
 
 # load in the calibration data
-calib_data_path = "../calib_data/MultiMatrix.npz" # assign path
+calib_data_path = "../calib_data_rpi/MultiMatrix_rpi.npz" # assign path
 
 calib_data = np.load(calib_data_path) # loads the data from the caliberated file
 print(calib_data.files) # displays the files

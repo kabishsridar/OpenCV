@@ -38,7 +38,7 @@ obj_points_3D = []  # 3d point in real world space
 img_points_2D = []  # 2d points in image plane
 
 # The images directory path
-image_dir_path = "//home//kabish//python_projects//opencv//Distance_Estimation//3.1 camera_calibration//images_rpi"
+image_dir_path = "//home//kabish//python_projects//opencv//Distance_Estimation//3.1 camera_calibration//images_rpi2"
 
 files = os.listdir(image_dir_path)  # list of names of all the files present
 for file in files:
