@@ -31,7 +31,7 @@ y = []
 # iterate through multiple frames, in a live video feed
 while True:
     frame_org = picam2.capture_array("main")
-    # frame_org = cv.flip(frame, 1)
+    # frame_org = cv.flip(frame, -1)
     frame_bgr = cv.cvtColor(frame_org, cv.COLOR_RGB2BGR)
     #cv.imshow("RPI live", frame_bgr)
     # turning the frame to grayscale-only (for efficiency)
