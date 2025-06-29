@@ -65,7 +65,7 @@ print("calibrated")
 
 print("dumping the data into one files using numpy ")
 np.savez(
-    f"{calib_data_path}/MultiMatrix_rpi",
+    f"{calib_data_path}/MultiMatrix",
     camMatrix=mtx,
     distCoef=dist,
     rVector=rvecs,
@@ -76,7 +76,7 @@ print("-------------------------------------------")
 
 print("loading data stored using numpy savez function\n \n \n")
 
-data = np.load(f"{calib_data_path}/MultiMatrix_rpi.npz")
+data = np.load(f"{calib_data_path}/MultiMatrix.npz")
 
 camMatrix = data["camMatrix"]
 distCof = data["distCoef"]

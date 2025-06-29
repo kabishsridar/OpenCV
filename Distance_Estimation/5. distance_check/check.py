@@ -14,7 +14,7 @@ time.sleep(1)
 cv.namedWindow("RPI connection", cv.WINDOW_NORMAL)
 
 # load in the calibration data
-calib_data_path = "../calib_data_rpi/MultiMatrix_rpi.npz" # assign path
+calib_data_path = "/home/kabish/python_projects/calib_data_rpi/MultiMatrix.npz" # assign path
 
 calib_data = np.load(calib_data_path) # loads the data from the caliberated file
 print(calib_data.files) # displays the files
@@ -23,7 +23,7 @@ cam_mat = calib_data["camMatrix"] # assigning the datas caliberated through the 
 dist_coef = calib_data["distCoef"]
 r_vectors = calib_data["rVector"]
 t_vectors = calib_data["tVector"]
-
+print(cam_mat, dist_coef, r_vectors, t_vectors)
 MARKER_SIZE = 6  # centimeters (measure your printed marker size)
 
 marker_dict = aruco.getPredefinedDictionary(aruco.DICT_5X5_250) # assigning the dictionary type
@@ -82,6 +82,7 @@ while True:
                 cv.LINE_AA,
             ) # displays x and y coordinates
             # print(ids, "  ", corners)
+    # cv.namedWindow("RPI connection", cv.WINDOW_NORMAL)
     cv.imshow("frame", frame_bgr)
     key = cv.waitKey(1)
     if key == ord("q"):
