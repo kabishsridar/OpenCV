@@ -6,7 +6,7 @@ Chess_Board_Dimensions = (9, 6) # assigning the dimensions of the chess board
 n = 0  # image counter
 
 # checks images dir is exist or not
-image_path = "images"
+image_path = "images_2_aruco"
 
 Dir_Check = os.path.isdir(image_path) # checks whether the path is presented
 

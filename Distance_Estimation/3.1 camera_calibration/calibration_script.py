@@ -11,7 +11,7 @@ SQUARE_SIZE = 22  # millimeters (change it according to printed size)
 # termination criteria
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
-calib_data_path = "../calib_data"
+calib_data_path = "C:\\57_challenges\\OpenCV_silicon_jelly\\calib_data"
 CHECK_DIR = os.path.isdir(calib_data_path)
 
 # saving the image / camera calibration data
@@ -38,7 +38,7 @@ obj_points_3D = []  # 3d point in real world space
 img_points_2D = []  # 2d points in image plane
 
 # The images directory path
-image_dir_path = "C:\\57_challenges\\OpenCV_silicon_jelly\\Distance Estimation\\3.1 camera_calibration\\images"
+image_dir_path = "C:\\57_challenges\\OpenCV_silicon_jelly\\images_2_aruco"
 
 files = os.listdir(image_dir_path)  # list of names of all the files present
 for file in files:
@@ -65,7 +65,7 @@ print("calibrated")
 
 print("dumping the data into one files using numpy ")
 np.savez(
-    f"{calib_data_path}/MultiMatrix",
+    f"{calib_data_path}/MultiMatrix_2_aruco",
     camMatrix=mtx,
     distCoef=dist,
     rVector=rvecs,
@@ -76,7 +76,7 @@ print("-------------------------------------------")
 
 print("loading data stored using numpy savez function\n \n \n")
 
-data = np.load(f"{calib_data_path}/MultiMatrix.npz")
+data = np.load(f"{calib_data_path}/MultiMatrix_2_aruco.npz")
 
 camMatrix = data["camMatrix"]
 distCof = data["distCoef"]
