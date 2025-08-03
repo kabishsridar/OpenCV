@@ -1,4 +1,4 @@
-import cv2 as cv
+import cv2 as cv # importing modules
 from cv2 import aruco
 import numpy as np
 
@@ -14,7 +14,7 @@ MARKER_SIZE_CM = 10
 MARKER_SIZE_MM = MARKER_SIZE_CM * 10  # for mm conversion
 
 # ArUco settings
-marker_dict = aruco.getPredefinedDictionary(aruco.DICT_5X5_250)
+marker_dict = aruco.getPredefinedDictionary(aruco.DICT_5X5_250) # will get the dictionary values of the aruco marker type
 param_markers = aruco.DetectorParameters()
 
 cap = cv.VideoCapture(0)
@@ -24,10 +24,10 @@ while True:
     if not ret:
         break
 
-    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY) # converts to gray scale
     marker_corners, marker_IDs, reject = aruco.detectMarkers(
         gray, marker_dict, parameters=param_markers
-    )
+    ) # it detects the corners and the ids
 
     centers = {}
     tVecs_dict = {}
@@ -55,7 +55,7 @@ while True:
         if len(centers) >= 2:
             marker_ids = list(centers.keys())[:2]  # First two detected markers
             pt1, pt2 = centers[marker_ids[0]], centers[marker_ids[1]]
-            pixel_distance = int(np.linalg.norm(np.array(pt1) - np.array(pt2)))
+            pixel_distance = int(np.linalg.norm(np.array(pt1) - np.array(pt2))) # calculates distance betweeen two aruco markers center points in pixels
 
             # Draw line and pixel distance
             cv.line(frame, pt1, pt2, (0, 0, 255), 2)
